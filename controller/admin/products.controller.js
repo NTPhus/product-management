@@ -34,6 +34,13 @@ module.exports.products = async (req, res) => {
   if(req.query.status){
     find.status = req.query.status;
   }
+
+  let keyword = "";
+  if(req.query.keyword){
+    keyword = req.query.keyword;
+    const regex = new RegExp(keyword, "i"); //Regex
+    find.title = regex;
+  }
   
   const products = await Product.find(find)
 
@@ -42,7 +49,8 @@ module.exports.products = async (req, res) => {
     res.render("admin/pages/products/index", {
       pageTitle: "Trang sản phẩm",
       products: products,
-      filterStatus: filterStatus
+      filterStatus: filterStatus,
+      keyword: keyword
     });
   };
   
