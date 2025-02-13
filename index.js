@@ -1,6 +1,8 @@
 const express = require('express');
 require("dotenv").config();
+
 const route = require("./routes/clients/index.route");
+const routeAdmin = require("./routes/admin/index.route");
 
 const database = require("./config/database");
 
@@ -14,6 +16,7 @@ app.set("view engine", "pug");
 
 app.use(express.static("public"));
 
+routeAdmin(app);
 route(app);
 
 app.listen(port, () => {
