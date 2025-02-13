@@ -1,5 +1,6 @@
 extends ../../layouts/default
 include ../../mixins/filter-status
+include ../../mixins/search
 
 block main
   h1 Trang danh sách sản phẩm
@@ -12,11 +13,7 @@ block main
                 +filter-status(filterStatus)
             
             .col-6
-                form(id="form-search")
-                    .input-group
-                        input(type="text" placeholder="Nhập từ khóa" name="keyword" class="form-control" value=keyword)
-                        .input-group-append 
-                            button(class="btn btn-success" type="submit") Tìm
+                +search(keyword)
 
   .card.mb-3 
     .card-header Danh sách sản phẩm
