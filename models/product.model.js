@@ -10,7 +10,8 @@ const productSchema = new mongoose.Schema(
         thumbnail: String,
         status: String,
         prosition: Number,
-        deleted: Boolean
+        deleted: Boolean,
+        deletedAd: Date
     }
 );
 
