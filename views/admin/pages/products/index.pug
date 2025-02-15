@@ -3,9 +3,16 @@ include ../../mixins/filter-status
 include ../../mixins/search
 include ../../mixins/pagination
 include ../../mixins/form-change-multi
+include ../../mixins/box-head
+include ../../mixins/alert
 
 block main
-  h1 Trang danh sách sản phẩm
+  +alert-success("5000")
+
+  .container.my-3
+    .row 
+      .col-12
+          +box-head("Danh sách sản phẩm")
 
   .card.mb-3 
     .card-header Bộ lọc và tìm kiếm 
