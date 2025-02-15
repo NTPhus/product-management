@@ -9,7 +9,7 @@ const productSchema = new mongoose.Schema(
         stock: Number,
         thumbnail: String,
         status: String,
-        prosition: Number,
+        position: Number,
         deleted: Boolean,
         deletedAd: Date
     }
