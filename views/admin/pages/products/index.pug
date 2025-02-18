@@ -8,7 +8,7 @@ include ../../mixins/alert
 
 block main
   +alert-success("5000")
-
+  +alert-error("5000")
   .container.my-3
     .row 
       .col-12
@@ -95,7 +95,7 @@ block main
                     class="badge badge-danger"
                     ) Ngừng hoạt động
               td 
-                button(class="btn btn-warning btn-sm") Sửa
+                a(class="btn btn-warning btn-sm" href=`${prefixAdmin}/products/edit/${item.id}`) Sửa
                 button(
                   class="btn btn-danger btn-sm ml-1"
                   button-delete
