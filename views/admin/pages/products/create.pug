@@ -56,7 +56,7 @@ block main
                 value="0"
                 min="0"
             )
-        div(class="form-group")
+        div(class="form-group" upload-image)
             label(for="thumbnail") Ảnh 
             input(
                 type="file"
@@ -64,7 +64,14 @@ block main
                 name="thumbnail"
                 class="form-control-file"
                 accept="image/*"
+                upload-image-input
             ) 
+            img(
+                src=""
+                upload-image-preview
+                class="image-preview"
+            )
+            button(type="button" class="btn btn-danger d-none" btn-cancel) X
         div(class="form-group")
             label(for="position") Vị trí
             input(
@@ -100,4 +107,4 @@ block main
                 class="btn btn-primary"
             ) Tạo mới
 
-    script(src="/admin/js/product.js") 
+    script(src="/admin/js/script.js") 

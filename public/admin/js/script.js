@@ -82,10 +82,10 @@ if (checkboxMulti) {
       const countChecked = checkboxMulti.querySelectorAll(
         "input[name='id']:checked"
       ).length;
-      if(countChecked === inputsId.length){
+      if (countChecked === inputsId.length) {
         inputCheckAll.checked = true;
-      }else{
-        inputCheckAll.checked = false;;
+      } else {
+        inputCheckAll.checked = false;
       }
     });
   });
@@ -94,66 +94,91 @@ if (checkboxMulti) {
 //End Checkbox Multi
 
 //Form change multi
-  const formChangeMulti = document.querySelector("[form-change-multi]");
-  if(formChangeMulti){
-    formChangeMulti.addEventListener("submit", (e) => {
-      e.preventDefault();
+const formChangeMulti = document.querySelector("[form-change-multi]");
+if (formChangeMulti) {
+  formChangeMulti.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-      const checkboxMulti = document.querySelector("[checkbox-multi]");
-      const inputChecked = checkboxMulti.querySelectorAll(
-        "input[name='id']:checked"
-      );
+    const checkboxMulti = document.querySelector("[checkbox-multi]");
+    const inputChecked = checkboxMulti.querySelectorAll(
+      "input[name='id']:checked"
+    );
 
-      const typeChange = e.target.elements.type.value;
+    const typeChange = e.target.elements.type.value;
 
-      if(typeChange == "delete-all"){
-        const isConfirm = confirm("Bạn có chắc chắn là muốn xóa tất cả không");
+    if (typeChange == "delete-all") {
+      const isConfirm = confirm("Bạn có chắc chắn là muốn xóa tất cả không");
 
-        if(!isConfirm){
-            return;
+      if (!isConfirm) {
+        return;
+      }
+    }
+
+    if (inputChecked.length > 0) {
+      let ids = [];
+      const inputIds = formChangeMulti.querySelector("input[name=ids]");
+
+      inputChecked.forEach((input) => {
+        const id = input.value;
+
+        if (typeChange == "change-position") {
+          const position = input
+            .closest("tr")
+            .querySelector("input[name='position']").value;
+
+          ids.push(`${id}-${position}`);
+        } else {
+          ids.push(id);
         }
-      }
+      });
 
-      if(inputChecked.length > 0){
-        let ids = [];
-        const inputIds = formChangeMulti.querySelector("input[name=ids]");
-
-        inputChecked.forEach(input => {
-          const id = input.value;
-
-          if(typeChange == "change-position"){
-            const position = input.closest("tr").querySelector("input[name='position']").value;
-
-            ids.push(`${id}-${position}`);
-          }else{
-            ids.push(id);
-          }
-          
-        })
-
-        inputIds.value = ids.join(", ");
-        formChangeMulti.submit();
-      }else{
-        alert("Vui lòng chọn ít nhất một sản phẩm");
-      }
-    })
-  }
+      inputIds.value = ids.join(", ");
+      formChangeMulti.submit();
+    } else {
+      alert("Vui lòng chọn ít nhất một sản phẩm");
+    }
+  });
+}
 //End form change multi
 
 //Show alert
 const showAlert = document.querySelector("[show-alert]");
 
-if(showAlert){
-  console.log(showAlert.getAttribute("data-time"))
+if (showAlert) {
+  console.log(showAlert.getAttribute("data-time"));
   const timeAlert = parseInt(showAlert.getAttribute("data-time"));
   const closeAlert = showAlert.querySelector("[close-alert]");
 
   setTimeout(() => {
     showAlert.classList.add("alert-hidden");
-  } ,timeAlert);
+  }, timeAlert);
 
   closeAlert.addEventListener("click", () => {
     showAlert.classList.add("alert-hidden");
-  })
+  });
 }
 //End show alert
+// Upload Image
+const uploadImage = document.querySelector("[upload-image]");
+if (uploadImage) {
+  const uploadImageInput = document.querySelector("[upload-image-input]");
+  const uploadImagePreview = document.querySelector("[upload-image-preview]");
+
+  uploadImageInput.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      uploadImagePreview.src = URL.createObjectURL(file);
+    }
+
+    const btnCancel = document.querySelector("[btn-cancel]");
+
+    btnCancel.classList.toggle("d-none");
+
+    btnCancel.addEventListener("click", () => {
+      uploadImageInput.value = "";
+      uploadImagePreview.src = "";
+      btnCancel.classList.add("d-none");
+    });
+  });
+}
+// End Upload Image
