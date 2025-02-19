@@ -20,7 +20,7 @@ database.connect();
 const app = express();
 const port = process.env.PORT;
 
-app.set("views", __dirname+"\views");
+app.set("views", __dirname+"/views");
 app.set("view engine", "pug");
 
 //Flash
@@ -32,7 +32,7 @@ app.use(flash());
 // App local Variable
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
-app.use(express.static(__dirname+"\public"));
+app.use(express.static(__dirname+"/public"));
 
 app.use(methodOverride("_method"));
 
