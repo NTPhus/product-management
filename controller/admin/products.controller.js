@@ -3,8 +3,8 @@ const filterStatusHelper = require("../../helper/filterStatus");
 const searchHelper = require("../../helper/search");
 const paginationHelper = require("../../helper/pagination");
 const { prefixAdmin } = require("../../config/system");
-//[GET] /admin/products
 
+//[GET] /admin/products
 module.exports.products = async (req, res) => {
   //Bộ lọc
   const filterStatus = filterStatusHelper(req.query);
