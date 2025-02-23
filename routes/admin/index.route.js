@@ -1,15 +1,24 @@
 const systemConfig = require("../../config/system");
 
-const dashboardRouter = require("./dashboard.route");
-const productsRouter = require("./products.route");
-const productCategoryRouter = require("./product-category.route");
-const roleRouter = require("./role.route");
-const accountRouter = require("./accounts.route");
+const dashboardRoutes = require("./dashboard.route");
+const productsRoutes = require("./products.route");
+const productCategoryRoutes = require("./product-category.route");
+const roleRoutes = require("./role.route");
+const accountRoutes = require("./accounts.route");
+const authRoutes = require("./auth.route");
+
 module.exports = (app) => {
   const PATH_ADMIN = systemConfig.prefixAdmin;
-  app.use(PATH_ADMIN + "/dashboard", dashboardRouter);
-  app.use(PATH_ADMIN + "/products", productsRouter);
-  app.use(PATH_ADMIN + "/product-category", productCategoryRouter);
-  app.use(PATH_ADMIN + "/roles", roleRouter);
-  app.use(PATH_ADMIN + "/accounts", accountRouter);
+
+  app.use(PATH_ADMIN + "/dashboard", dashboardRoutes);
+
+  app.use(PATH_ADMIN + "/products", productsRoutes);
+
+  app.use(PATH_ADMIN + "/product-category", productCategoryRoutes);
+
+  app.use(PATH_ADMIN + "/roles", roleRoutes);
+  
+  app.use(PATH_ADMIN + "/accounts", accountRoutes);
+
+  app.use(PATH_ADMIN + "/auth", authRoutes);
 };
