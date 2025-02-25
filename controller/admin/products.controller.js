@@ -1,4 +1,5 @@
 const Product = require("../../models/product.model");
+const Account = require("../../models/account.model");
 const ProductCategory = require("../../models/product-category.model");
 const filterStatusHelper = require("../../helper/filterStatus");
 const searchHelper = require("../../helper/search");
@@ -50,6 +51,14 @@ module.exports.products = async (req, res) => {
     .sort(sort)
     .limit(objectPagination.limitItem)
     .skip(objectPagination.skip);
+
+  for (const product of products) {
+    const user = await Account.findOne({ _id: product.createdBy.account_id });
+
+    if (user) {
+      product.accountFullname = user.fullname;
+    }
+  }
 
   res.render("admin/pages/products/index", {
     pageTitle: "Trang sản phẩm",
@@ -153,6 +162,10 @@ module.exports.createPost = async (req, res) => {
     req.body.position = parseInt(req.body.position);
   }
 
+  req.body.createdBy = {
+    account_id: res.locals.user.id,
+  };
+
   const product = new Product(req.body);
   await product.save();
 
@@ -175,7 +188,7 @@ module.exports.edit = async (req, res) => {
     res.render("admin/pages/products/edit", {
       pageTitle: "Chỉnh sửa sản phẩm",
       product: product,
-      category: newCategory
+      category: newCategory,
     });
   } catch (error) {
     req.flash("error", "Không tồn tại sản phẩm này");

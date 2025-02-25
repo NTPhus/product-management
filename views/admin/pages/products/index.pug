@@ -6,6 +6,7 @@ include ../../mixins/form-change-multi
 include ../../mixins/box-head
 include ../../mixins/alert
 include ../../mixins/sort
+include ../../mixins/moment
 
 block main
   if(role.permissions.includes("products_view"))
@@ -55,6 +56,7 @@ block main
               th Giá
               th Vị trí
               th Trạng thái 
+              th Người tạo
               th Hành động 
           tbody
             each item, index in products 
@@ -101,6 +103,10 @@ block main
                         button-change-status 
                         class="badge badge-danger"
                         ) Ngừng hoạt động
+                td
+                  p #{item.accountFullname}
+                  p 
+                    +formatDate(item.createdBy.createdAt)
                 td 
                   a(class="btn btn-secondary btn-sm" href=`${prefixAdmin}/products/detail/${item.id}`) Xem chi tiết
                   if(role.permissions.includes("products_edit"))
