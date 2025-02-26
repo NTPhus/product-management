@@ -10,7 +10,11 @@ module.exports.index = async (req, res) => {
     deleted: false,
   }).sort({ position: "desc" });
 
-  const productsNew = productHelper.priceNewProduct(products); 
+  console.log(products)
+
+  const productsNew = productHelper.priceNewProducts(products); 
+
+  console.log(productsNew)
 
   res.render("client/pages/products/index", {
     pageTitle: "Danh sách sản phẩm",
@@ -18,15 +22,27 @@ module.exports.index = async (req, res) => {
   });
 };
 
-//[GET] /products/:slug
+//[GET] /products/detail/:slug
 module.exports.detail = async (req, res) => {
   try {
     const find = {
       deleted: false,
       status: "active",
-      slug: req.params.slug,
+      slug: req.params.slugProduct,
     };
     const product = await Product.findOne(find);
+
+    if(product.product_category_id){
+      const category = await ProductCategory.findOne({
+        _id: product.product_category_id,
+        status: "active",
+        deleted: false
+      })
+
+      product.category = category;
+    }
+
+    product.priceNew = productHelper.priceNewProduct(product);
 
     res.render("client/pages/products/detail", {
       pageTitle: product.title,
@@ -53,7 +69,7 @@ module.exports.category = async (req, res) => {
     deleted: false
   }).sort({position: "desc"});
 
-  const productsNew = productHelper.priceNewProduct(products); 
+  const productsNew = productHelper.priceNewProducts(products); 
 
   res.render("client/pages/products/index", {
     pageTitle: category.title,
