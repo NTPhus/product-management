@@ -36,6 +36,15 @@ module.exports.create = async (req, res) => {
 
 //[POST] /admin/product-category/create
 module.exports.createPost = async (req, res) => {
+ const permissions = res.locals.role.permissions;
+  // Bảo mật phân quyền
+  // if(permissions.includes("product-category_create")){
+  // console.log("Có quyền"); 
+  // }else{
+  //   res.send("403");
+  //   return;
+  // }
+
   if (req.body.position == "") {
     const count = await ProductCategory.countDocuments();
     req.body.position = count + 1;
