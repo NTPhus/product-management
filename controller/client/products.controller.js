@@ -10,11 +10,7 @@ module.exports.index = async (req, res) => {
     deleted: false,
   }).sort({ position: "desc" });
 
-  console.log(products)
-
   const productsNew = productHelper.priceNewProducts(products); 
-
-  console.log(productsNew)
 
   res.render("client/pages/products/index", {
     pageTitle: "Danh sách sản phẩm",
