@@ -2,13 +2,30 @@ include ../mixins/sub-menu
 
 header.header
     .container
-        .row-align-items-center
+        .row.align-items-center
             .col-3
                 .inner-logo
                     a(href='/')
                         img(src="/images/NTP_logo.png", alt="Logo")
             
-            .col9 
+            .col-5 
+                form(
+                    action="/search"
+                    method="GET"
+                )
+                    div(class="form-group d-flex mb-0")
+                        input(
+                            type="text"
+                            placeholder="Nhập từ khóa ..."
+                            class="form-control"
+                            name="keyword"
+                        )
+                        button(
+                            type="submit"
+                            class="btn btn-primary"
+                        ) Tìm
+            
+            .col-4
                 .inner-menu 
                     ul 
                         li 
