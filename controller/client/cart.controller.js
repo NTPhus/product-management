@@ -31,8 +31,6 @@ module.exports.index = async (req, res) => {
     0
   );
 
-  console.log(cart.totalPrice);
-
   res.render("client/pages/cart/index", {
     pageTitle: "Giỏ hàng",
     cartDetail: cart,
