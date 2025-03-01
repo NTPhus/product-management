@@ -23,7 +23,7 @@ const productCategorySchema = new mongoose.Schema(
             type: Boolean,
             default: false
         },
-        deletedAd: Date
+        deletedAt: Date
     },
     {
         timestamps: true
