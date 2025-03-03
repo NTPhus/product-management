@@ -1,0 +1,10 @@
+extends ../../layouts/default
+include ../../mixins/box-head
+
+block main 
+    .container.my-3 
+        .row 
+            .col-12 
+                +box-head("Thông tin tài khoản")
+            
+        div #{user}
