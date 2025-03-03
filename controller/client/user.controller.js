@@ -78,7 +78,7 @@ module.exports.loginPost = async (req, res) => {
   })  
 
   if(cart){
-    res.cookie("cardId", card._id);
+    res.cookie("cardId", cart.id);
   }else{
     await Cart.updateOne({
       _id: req.cookies.cartId
