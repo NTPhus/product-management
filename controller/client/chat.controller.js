@@ -19,10 +19,20 @@ module.exports.index = async (req, res) => {
             //Trả data về client
             _io.emit("SERVER_RETURN_MESSAGE", {
                 user_id: user_id,
-                fullname: "",
+                fullname: fullname,
                 content: content
             });
+        });
+
+        //Typing
+        socket.on("CLIENT_SEND_TYPING", async (type) => {
+            socket.broadcast.emit("SERVER_RETURN_TYPING", {
+                user_id: user_id,
+                fullname: fullname,
+                type: type
+            })
         })
+        //End Typing
     });
     //end SocketIO
 
