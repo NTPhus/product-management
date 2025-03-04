@@ -170,3 +170,54 @@
     cursor: pointer;
 }
 /*End  Show alert */
+
+/* Chat */
+.inner-body{
+    width: 500px;
+    border: 1px solid #ddd;
+}
+
+.inner-comming{
+    display: flex;
+    flex-direction: column;
+}
+
+.inner-outgoing{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.inner-name{
+    font-weight: bold;
+}
+
+.inner-content{
+    width: 250px;
+}
+
+.inner-comming .inner-content{
+    background-color: #ddd;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.inner-outgoing .inner-content{
+    background-color: pink;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.input-message{
+    width: 450px;
+    border-radius: 10px;
+}
+
+.button-message{
+    border-radius: 10px;
+    background-color: pink;
+    border: none;
+    margin-left: 5px;
+}
+/* end Chat */

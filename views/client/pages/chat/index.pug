@@ -11,27 +11,29 @@ block main
             .col-12 
                 .chat
                     .inner-body 
-                        .inner-comming 
-                            .inner-name Em yêu 
-                            .inner-content 
-                                | A ơi sang nhà em nha, nhà em không có ai ở nhà cả 
-                        .inner-outging 
-                            .inner-content 
-                                | Thế à? OK em iu 
-                        .inner-comming 
-                            .inner-name Em yêu 
-                            .inner-content 
-                                | Nhanh nha, nhanh nha
-                        .inner-outging 
-                            .inner-content 
-                                | Ck đến rồi mà có thấy ai ở nhà đâu
-                        .inner-comming 
-                            .inner-name Em yêu 
-                            .inner-content 
-                                | Thì em bảo không có ai ở nhà mà
-                        .inner-outging 
-                            .inner-content 
-                                | Chít tịt
+                        each chat in chats
+                            div(class=(chat.user_id == user.id ? "inner-outgoing" : "inner-comming"))
+                                if(chat.user_id != user.id)
+                                    .inner-name #{chat.infoUser.fullname}
+                                .inner-content 
+                                    | #{chat.content}
+                        //- .inner-outgoing 
+                        //-     .inner-content 
+                        //-         | Thế à? OK em iu 
+                        //- .inner-comming 
+                        //-     .inner-name Em yêu 
+                        //-     .inner-content 
+                        //-         | Nhanh nha, nhanh nha
+                        //- .inner-outgoing 
+                        //-     .inner-content 
+                        //-         | Ck đến rồi mà có thấy ai ở nhà đâu
+                        //- .inner-comming 
+                        //-     .inner-name Em yêu 
+                        //-     .inner-content 
+                        //-         | Thì em bảo không có ai ở nhà mà
+                        //- .inner-outgoing 
+                        //-     .inner-content 
+                        //-         | Chít tịt
                     .inner-foot 
                         form(
                             class="inner-form"
@@ -41,8 +43,9 @@ block main
                                 type="text"
                                 placeholder="Nhập nội dung..."
                                 name="content"
+                                class="input-message"
                             )
-                            button
+                            button(class="button-message")
                                 i.fa-solid.fa-paper-plane
                             
             
