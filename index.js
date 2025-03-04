@@ -8,6 +8,9 @@ const flash = require("express-flash");
 const multer = require("multer");
 const mongoose = require("mongoose")
 const moment = require("moment");
+const http = require('http');
+
+const { Server } = require("socket.io");
 
 require("dotenv").config();
 
@@ -22,6 +25,15 @@ database.connect();
 
 const app = express();
 const port = process.env.PORT;
+
+//SocketIO
+const server = http.createServer(app);
+const io = new Server(server);
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+});
+//End SocketIO
 
 app.set("views", `${__dirname}/views`);
 app.set("view engine", "pug");
@@ -57,6 +69,6 @@ app.get("*", (req, res) => {
   })
 })
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
