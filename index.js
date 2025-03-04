@@ -29,7 +29,7 @@ const port = process.env.PORT;
 //SocketIO
 const server = http.createServer(app);
 const io = new Server(server);
-
+global._io = io
 io.on('connection', (socket) => {
   console.log('a user connected');
 });
