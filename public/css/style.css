@@ -175,6 +175,8 @@
 .inner-body{
     width: 500px;
     border: 1px solid #ddd;
+    max-height: 450px;
+    overflow-y: auto;
 }
 
 .inner-comming{
