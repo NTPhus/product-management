@@ -212,7 +212,7 @@
 }
 
 .input-message{
-    width: 450px;
+    width: 400px;
     border-radius: 10px;
 }
 
@@ -223,3 +223,14 @@
     margin-left: 5px;
 }
 /* end Chat */
+
+/* Emoji Icon */
+.tooltip {
+    visibility: hidden;
+}
+
+.tooltip.shown {
+    visibility: visible;
+    opacity: 1;
+}
+/* End Emoji Icon */
