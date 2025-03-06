@@ -74,11 +74,12 @@ if (badgeUsersAccept) {
 // End SERVER_RETURN_LENGTH_ACCEPT_FRIEND
 
 // SERVER_RETURN_INFO_ACCEPT_FRIEND
-const dataUsersAccept = document.querySelector("[data-users-accept]");
-if (dataUsersAccept) {
-  const userId = dataUsersAccept.getAttribute("data-users-accept");
-  socket.on("SERVER_RETURN_INFO_ACCEPT_FRIEND", (data) => {
-    if (userId == data.userId) {
+socket.on("SERVER_RETURN_INFO_ACCEPT_FRIEND", (data) => {
+  // Trang lời mời đã nhận
+  const dataUsersAccept = document.querySelector("[data-users-accept]");
+  if (dataUsersAccept) {
+    const userId = dataUsersAccept.getAttribute("data-users-accept");
+    if (userId === data.userId) {
       //vẽ user ra giao diện
       const div = document.createElement("div");
       div.classList.add("col-4");
@@ -134,19 +135,31 @@ if (dataUsersAccept) {
       acceptFriend(buttonAccept);
       // Hết Chấp nhận lời mời kết bạn
     }
-  });
-}
+  }
+
+  //Trang danh sách người dùng
+  const dataUsersNotFriend = document.querySelector("[data-users-not-friend]");
+  if (dataUsersNotFriend) {
+    const userId = dataUsersNotFriend.getAttribute("data-users-not-friend");
+    if (userId === data.userId) {
+      const boxUserRemove = dataUsersNotFriend.querySelector(`[user-id='${data.infoUserA._id}']`);
+      if (boxUserRemove) {
+        dataUsersNotFriend.removeChild(boxUserRemove);
+      }
+    }
+  }
+});
 // End SERVER_RETURN_INFO_ACCEPT_FRIEND
 
 //SERVER_RETURN_USER_ID_ACCEPT_FRIEND
 socket.on("SERVER_RETURN_USER_ID_ACCEPT_FRIEND", (data) => {
   const boxUserRemove = document.querySelector(`[user-id='${userIdA}']`);
-  if(boxUserRemove){
+  if (boxUserRemove) {
     const dataUsersAccept = document.querySelector("[data-users-accept]");
-    const userIdB = badgeUsersAccept.getAttribute(("badge-users-accept"));
-    if(userIdB === data.userIdB){
+    const userIdB = badgeUsersAccept.getAttribute("badge-users-accept");
+    if (userIdB === data.userIdB) {
       dataUsersAccept.removeChild(boxUserRemove);
     }
   }
-})
+});
 //End SERVER_RETURN_USER_ID_ACCEPT_FRIEND
