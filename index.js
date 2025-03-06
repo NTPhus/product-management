@@ -31,7 +31,7 @@ const server = http.createServer(app);
 const io = new Server(server);
 global._io = io
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  console.log('a user connected: ' + socket.id);
 });
 //End SocketIO
 

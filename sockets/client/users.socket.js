@@ -101,7 +101,11 @@ module.exports = (res) => {
             lengthAcceptFriends: lengthAcceptFriends
         });
 
-        
+        //Lấy id của A và trả về cho B
+        socket.broadcast.emit("SERVER_RETURN_USER_ID_ACCEPT_FRIEND", {
+            userIdA: myUserId,
+            userIdB: userId,
+        });
     });
 
     //Chức năng từ chối kết bạn

@@ -12,7 +12,7 @@ module.exports.index = async (req, res) => {
     //Lấy data từ database
     const chats = await Chat.find({
         deleted: false
-    })
+    }).limit(10);
 
     for(const chat of chats){
         const infoUser = await User.findOne({

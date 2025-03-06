@@ -8,6 +8,17 @@ const upload = new FileUploadWithPreview.FileUploadWithPreview('upload-images', 
 });
 //end file-upload-with-preview
 
+// Show Typing
+let timeOut;
+const showTyping = () => {
+    socket.emit("CLIENT_SEND_TYPING", "show");
+    clearTimeout(timeOut);
+    timeOut = setTimeout(() => {
+      socket.emit("CLIENT_SEND_TYPING", "hidden");
+    }, 3000);
+}
+// end Show Typing
+
 //CLIENT_SEND_MESSAGE
 const formSendData = document.querySelector(".chat .inner-form");
 if (formSendData) {
@@ -97,19 +108,6 @@ if (buttonIcon) {
 }
 //End Show Popup
 
-// Show Typing
-let timeOut;
-const showTyping = () => {
-    socket.emit("CLIENT_SEND_TYPING", "show");
-
-    clearTimeout(timeOut);
-
-    timeOut = setTimeout(() => {
-      socket.emit("CLIENT_SEND_TYPING", "hidden");
-    }, 3000);
-}
-// end Show Typing
-
 //Insert icon to input
 const emojiPicker = document.querySelector("emoji-picker");
 if (emojiPicker) {
@@ -141,7 +139,6 @@ const elementListTyping = document.querySelector(".chat .inner-list-typing");
 
 if (elementListTyping) {
   socket.on("SERVER_RETURN_TYPING", (data) => {
-    console.log(data);
     if (data.type == "show") {
       const existTyping = elementListTyping.querySelector(
         `[user-id="${data.user_id}"]`

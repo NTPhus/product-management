@@ -31,7 +31,6 @@ const refuseFriend = (button) => {
   button.addEventListener("click", () => {
     button.closest(".box-user").classList.remove("refuse");
     const userId = button.getAttribute("btn-refuse-friend");
-
     socket.emit("CLIENT_REFUSE_FRIEND", userId);
   });
 };
@@ -67,7 +66,7 @@ const badgeUsersAccept = document.querySelector("[badge-users-accept]");
 if (badgeUsersAccept) {
   const userId = badgeUsersAccept.getAttribute("badge-users-accept");
   socket.on("SERVER_RETURN_LENGTH_ACCEPT_FRIEND", (data) => {
-    if (userId === data.lengthAcceptFriends) {
+    if (userId == data.userId) {
       badgeUsersAccept.innerHTML = data.lengthAcceptFriends;
     }
   });
@@ -78,11 +77,12 @@ if (badgeUsersAccept) {
 const dataUsersAccept = document.querySelector("[data-users-accept]");
 if (dataUsersAccept) {
   const userId = dataUsersAccept.getAttribute("data-users-accept");
-  socket.on("SERVER_RETURN_LENGTH_ACCEPT_FRIEND", (data) => {
+  socket.on("SERVER_RETURN_INFO_ACCEPT_FRIEND", (data) => {
     if (userId == data.userId) {
       //vẽ user ra giao diện
       const div = document.createElement("div");
-      div.classList.add("col-6");
+      div.classList.add("col-4");
+      div.setAttribute("user-id", data.infoUserA._id);
       div.innerHTML = `      
           <div class="box-user">
             <div class="inner-avatar">
@@ -137,3 +137,16 @@ if (dataUsersAccept) {
   });
 }
 // End SERVER_RETURN_INFO_ACCEPT_FRIEND
+
+//SERVER_RETURN_USER_ID_ACCEPT_FRIEND
+socket.on("SERVER_RETURN_USER_ID_ACCEPT_FRIEND", (data) => {
+  const boxUserRemove = document.querySelector(`[user-id='${userIdA}']`);
+  if(boxUserRemove){
+    const dataUsersAccept = document.querySelector("[data-users-accept]");
+    const userIdB = badgeUsersAccept.getAttribute(("badge-users-accept"));
+    if(userIdB === data.userIdB){
+      dataUsersAccept.removeChild(boxUserRemove);
+    }
+  }
+})
+//End SERVER_RETURN_USER_ID_ACCEPT_FRIEND
