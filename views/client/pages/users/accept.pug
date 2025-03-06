@@ -8,12 +8,12 @@ block main
 
         .row 
             .col-12 
-                +box-head("Lời gửi kết bạn")
+                +box-head("Lời mời đã nhận")
         
         .row 
             each user in users
                 .col-4
-                    div(class="box-user add")
+                    div(class="box-user")
                         div(class="inner-avatar")
                             img(
                                 src=(user.avatar ? user.avatar : "/images/avatar.jfif")
@@ -24,12 +24,17 @@ block main
                             div(class="inner-buttons")
                                 button(
                                     class="btn btn-sm btn-primary mr-1"
-                                    btn-add-friend=user.id
-                                ) Kết bạn 
+                                    btn-accept-friend=user.id
+                                ) Chấp nhận 
                                 button(
                                     class="btn btn-sm btn-secondary mr-1"
-                                    btn-cancel-friend=user.id
-                                ) Hủy
+                                    btn-refuse-friend=user.id
+                                ) Từ chối
+                                button(
+                                    class="btn btn-sm btn-secondary mr-1"
+                                    btn-deleted-friend=user.id
+                                    disabled
+                                ) Đã xóa
             
 block script 
     script(src="/js/users.js")
