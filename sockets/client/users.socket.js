@@ -5,6 +5,10 @@ module.exports = (res) => {
     //Chức năng gửi yêu cầu
     socket.on("CLIENT_ADD_FRIEND", async (userId) => {
         const myUserId = res.locals.user.id;
+
+        //myUserId là id bên A
+        //userId là id bên B
+
         //Thêm id của A và acceptFriends của B
         const existIdAinB = await User.findOne({
             _id: userId,
@@ -43,6 +47,16 @@ module.exports = (res) => {
             userId: userId,
             lengthAcceptFriends: lengthAcceptFriends
         });
+
+        //Lấy info của A trả về cho B
+        const infoUserA = await User.findOne({
+            _id: myUserId
+        }).select("id avatar fullname");
+    
+        socket.broadcast.emit("SERVER_RETURN_INFO_ACCEPT_FRIEND", {
+            userId: userId,
+            infoUserA: infoUserA
+        })
     });
 
     //Chức năng hủy gửi yêu cầu
@@ -75,6 +89,19 @@ module.exports = (res) => {
                 $pull: {requestFriends : userId}
             });
         }
+
+        //Lấy ra độ dài của acceptFriends của B và trả về cho B
+        const infoUserB = await User.findOne({
+            _id: userId
+        });
+        const lengthAcceptFriends = infoUserB.acceptFriends.length;
+
+        socket.broadcast.emit("SERVER_RETURN_LENGTH_ACCEPT_FRIEND", {
+            userId: userId,
+            lengthAcceptFriends: lengthAcceptFriends
+        });
+
+        
     });
 
     //Chức năng từ chối kết bạn

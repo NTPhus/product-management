@@ -186,7 +186,7 @@
 
 .inner-outgoing{
     display: flex;
-    justify-content: flex-end;
+    justify-self: end;
 }
 
 .inner-name{
@@ -195,6 +195,10 @@
 
 .inner-content{
     width: 250px;
+}
+
+.inner-image {
+    display: block;
 }
 
 .inner-comming .inner-content{
@@ -387,7 +391,7 @@
     display: inline-block;
 }
 
-.box-user.refuse [btn-accepted-friend] {
+.box-user [btn-accepted-friend] {
     display: none;
 }
 
