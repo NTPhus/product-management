@@ -56,7 +56,7 @@ socket.on("SERVER_RETURN_MESSAGE", (data) => {
     htmlImages += `<div class="inner-images">`
       
     for(const image of data.images){
-      htmlImages += `<img src"${image}">`
+      htmlImages += `<img src="${image}">`
     }
    
     htmlImages += `<div>`;
