@@ -1,17 +1,41 @@
 const User = require("../../models/user.model");
 
+const usersSocket = require("../../sockets/client/users.socket");
+
 //[GET] /users/not-friend
 module.exports.notFriend = async (req, res) => {
-    const userId = res.locals.user.id;
+  //Socket
+  usersSocket(res);
+  //End Socket
 
-    const users = await User.find({
-        _id: {$ne: userId},
-        status: "active",
-        deleted: false
-    }).select("id avatar fullname");
+  const userId = res.locals.user.id;
 
-    res.render("client/pages/users/not-friend", {
-        pageTitle: "Danh sách người dùng",
-        users: users
-    })
-}
+  const myUser = await User.findOne({
+    _id: userid,
+  });
+
+  const requestFriends = myUser.requestFriends;
+
+  const acceptFriends = myUser.acceptFriends;
+
+  const users = await User.find({
+    $and: [
+      {
+        _id: { $ne: userId },
+      },
+      {
+        _id: { $nin: requestFriends },
+      },
+      {
+        _id: { $nin: acceptFriends },
+      },
+    ],
+    status: "active",
+    deleted: false,
+  }).select("id avatar fullname");
+
+  res.render("client/pages/users/not-friend", {
+    pageTitle: "Danh sách người dùng",
+    users: users,
+  });
+};
