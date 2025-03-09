@@ -165,11 +165,13 @@ if (elementListTyping) {
         bodyChat.scrollTop = bodyChat.scrollHeight;
       }
     } else {
+      
       const boxTypingRemove = elementListTyping.querySelector(
         `[user-id="${data.user_id}"]`
       );
       if (boxTypingRemove) {
         elementListTyping.removeChild(boxTypingRemove);
+        console.log(elementListTyping)
       }
     }
   });
