@@ -1,22 +1,25 @@
 import * as Popper from "https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm/index.js";
-import * as FileUploadWithPreview from 'https://cdn.jsdelivr.net/npm/file-upload-with-preview/dist/file-upload-with-preview.esm.js';
+import * as FileUploadWithPreview from "https://cdn.jsdelivr.net/npm/file-upload-with-preview/dist/file-upload-with-preview.esm.js";
 
 //file-upload-with-preview
-const upload = new FileUploadWithPreview.FileUploadWithPreview('upload-images', {
+const upload = new FileUploadWithPreview.FileUploadWithPreview(
+  "upload-images",
+  {
     multiple: true,
-    maxFileCount: 6
-});
+    maxFileCount: 6,
+  }
+);
 //end file-upload-with-preview
 
 // Show Typing
 let timeOut;
 const showTyping = () => {
-    socket.emit("CLIENT_SEND_TYPING", "show");
-    clearTimeout(timeOut);
-    timeOut = setTimeout(() => {
-      socket.emit("CLIENT_SEND_TYPING", "hidden");
-    }, 3000);
-}
+  socket.emit("CLIENT_SEND_TYPING", "show");
+  clearTimeout(timeOut);
+  timeOut = setTimeout(() => {
+    socket.emit("CLIENT_SEND_TYPING", "hidden");
+  }, 3000);
+};
 // end Show Typing
 
 //CLIENT_SEND_MESSAGE
@@ -29,7 +32,7 @@ if (formSendData) {
     if (content || images.length > 0) {
       socket.emit("CLIENT_SEND_MESSAGE", {
         content: content,
-        images: images
+        images: images,
       });
       e.target.elements.content.value = "";
       upload.resetPreviewPanel();
@@ -57,19 +60,19 @@ socket.on("SERVER_RETURN_MESSAGE", (data) => {
     div.classList.add("inner-comming");
   }
 
-  if(data.content){
+  if (data.content) {
     htmlContent = `
     <div class="inner-content">${data.content}</div>
-    `
+    `;
   }
 
-  if(data.images.length > 0){
-    htmlImages += `<div class="inner-images">`
-      
-    for(const image of data.images){
-      htmlImages += `<img src="${image}">`
+  if (data.images.length > 0) {
+    htmlImages += `<div class="inner-images">`;
+
+    for (const image of data.images) {
+      htmlImages += `<img src="${image}">`;
     }
-   
+
     htmlImages += `<div>`;
   }
 
@@ -117,7 +120,7 @@ if (emojiPicker) {
   emojiPicker.addEventListener("emoji-click", (e) => {
     const icon = e.detail.unicode;
     inputChat.value = inputChat.value + icon;
-    
+
     const end = inputChat.value.length;
     inputChat.setSelectionRange(end, end);
     inputChat.focus();
@@ -165,13 +168,12 @@ if (elementListTyping) {
         bodyChat.scrollTop = bodyChat.scrollHeight;
       }
     } else {
-      
       const boxTypingRemove = elementListTyping.querySelector(
         `[user-id="${data.user_id}"]`
       );
       if (boxTypingRemove) {
         elementListTyping.removeChild(boxTypingRemove);
-        console.log(elementListTyping)
+        console.log(elementListTyping);
       }
     }
   });
@@ -179,7 +181,7 @@ if (elementListTyping) {
 //End SERVER_RETURN_TYPING
 //Preview full image
 const bodyChatPreviewImage = document.querySelector(".chat .inner-body");
-if(bodyChatPreviewImage){
+if (bodyChatPreviewImage) {
   const gallery = new Viewer(bodyChatPreviewImage);
 }
 //End Preview full image
