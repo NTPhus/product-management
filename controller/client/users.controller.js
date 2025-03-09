@@ -18,8 +18,14 @@ module.exports.notFriend = async (req, res) => {
 
   const acceptFriends = myUser.acceptFriends;
 
+  const friends = myUser.friendList;
+  const friendListId = friends.map((friend) => friend.user_id);
+
   const users = await User.find({
     $and: [
+      {
+        _id: { $nin: friendListId },
+      },
       {
         _id: { $ne: userId },
       },
@@ -105,7 +111,7 @@ module.exports.friends = async (req, res) => {
   });
 
   const friendList = myUser.friendList;
-  const friendListId = friendList.map(user => user.user_id);
+  const friendListId = friendList.map((user) => user.user_id);
 
   const friends = await User.find({
     _id: { $in: friendListId },
@@ -115,6 +121,6 @@ module.exports.friends = async (req, res) => {
 
   res.render("client/pages/users/friend", {
     pageTitle: "Danh sách bạn bè",
-    friends: friends
+    friends: friends,
   });
 };

@@ -141,7 +141,7 @@ module.exports = (res) => {
     });
 
     //Chức năng chấp nhận kết bạn
-    socket.on("CLIENT_REFUSE_FRIEND", async (userId) => {
+    socket.on("CLIENT_ACCEPT_FRIEND", async (userId) => {
         const myUserId = res.locals.user.id;
         //Thêm user_id, room_chat_id của A vào friendList của B
         //Xóa id của A trong acceptFriends của B

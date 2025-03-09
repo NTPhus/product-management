@@ -78,7 +78,7 @@ module.exports.loginPost = async (req, res) => {
   })  
 
   if(cart){
-    res.cookie("cardId", cart.id);
+    res.cookie("cartId", cart.id);
   }else{
     await Cart.updateOne({
       _id: req.cookies.cartId
@@ -95,18 +95,32 @@ module.exports.loginPost = async (req, res) => {
     statusOnline: "online"
   })
 
+  _io.once('connection', (socket) => {
+    socket.broadcast.emit("SERVER_RETURN_USER_STATUS_ONLINE", {
+      userId: user.id,
+      status: "online"
+    });
+  })
+
   res.redirect("/");
 };
 
 //[GET] /user/logout/
 module.exports.logout = async (req, res) => {
   await User.updateOne({
-    tokenUser: res.cookies.tokenUser
+    tokenUser: req.cookies.tokenUser
   }, {
     statusOnline: "offline"
   })
   res.clearCookie("tokenUser");
   res.clearCookie("cardId");
+
+  _io.once('connection', (socket) => {
+    socket.broadcast.emit("SERVER_RETURN_USER_STATUS_ONLINE", {
+      userId: res.locals.user.id,
+      status: "offline"
+    });
+  })
   res.redirect("/");
 };
 
