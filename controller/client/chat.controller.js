@@ -1,5 +1,6 @@
 const Chat = require("../../models/chat.model");
 const User = require("../../models/user.model");
+const RoomChat = require("../../models/rooms-chat.model");
 
 const chatSocket = require("../../sockets/client/chat.socket");
 
@@ -7,6 +8,9 @@ const chatSocket = require("../../sockets/client/chat.socket");
 module.exports.index = async (req, res) => {
     const roomChatId = req.params.roomChatId;
 
+    const titleRoomChat = await RoomChat.findOne({
+        _id: roomChatId
+    }).select("title");
     //SocketIO
     chatSocket(req, res);
     //end SocketIO
@@ -27,6 +31,7 @@ module.exports.index = async (req, res) => {
 
     res.render("client/pages/chat/index", {
         pageTitle: "Chat",
-        chats: chats
+        chats: chats,
+        chatTitle: titleRoomChat.title
     })
 }
