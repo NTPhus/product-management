@@ -29,6 +29,7 @@ module.exports.registerPost = async (req, res) => {
   req.body.password = md5(req.body.password);
 
   const user = new User(req.body);
+  user.tokenUser = generateHelper(20);
   user.save();
 
   req.flash("success", "Tạo tài khoản thành công");
