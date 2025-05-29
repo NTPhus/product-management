@@ -1,19 +1,67 @@
-# product-management
-Product management provide full service like:
-- CRUD products
-- search product
-- product has divide into category to get easy to find
-- CRUD account admin
-- CRUD role in admin
-- CRUD account users
-- authenzation with token
-- authorization permission
-- Upload image
-- chat realtime with friend, with group
-- Add product in cart, remove product in cart
-- Get OTP for forgot password
-- get notification when user change data
-This project is serverside rendering use Nodejs and Pugjs to build
-Use Nosql is MongoDB and connect by mongoose
-Use socket.io to make realtime chat
-Password will encrypt after create account to get secure
+🛒 Product Management
+📋 Mô tả dự án
+Dự án Product Management là một ứng dụng quản lý sản phẩm đơn giản, giúp người dùng có thể thêm, sửa, xóa và xem danh sách sản phẩm. Đây là đồ án thực hành nhằm rèn luyện kỹ năng CRUD và xây dựng giao diện người dùng cơ bản.
+
+✨ Tính năng
+➕ Thêm mới sản phẩm
+
+📃 Hiển thị danh sách sản phẩm
+
+✏️ Chỉnh sửa thông tin sản phẩm
+
+🗑️ Xóa sản phẩm
+
+🔍 Tìm kiếm sản phẩm theo tên hoặc mã sản phẩm
+
+🛠️ Công nghệ sử dụng
+💻 Ngôn ngữ: (Ví dụ: Java, Python, JavaScript, ...)
+
+🏗️ Framework: (Ví dụ: Spring Boot, Django, React, ...)
+
+🗄️ Cơ sở dữ liệu: (MySQL, PostgreSQL, MongoDB,...)
+
+🔧 Công cụ hỗ trợ: Git, Docker, npm, Maven,...
+
+🚀 Cách cài đặt và chạy dự án
+Clone repository về máy:
+
+git clone https://github.com/NTPhus/product-management.git
+cd product-management
+Cài đặt các phụ thuộc:
+
+
+# Ví dụ với Node.js
+npm install
+Cấu hình kết nối cơ sở dữ liệu:
+
+Mở file cấu hình (config, .env, ...)
+
+Thiết lập thông tin database
+
+Khởi động ứng dụng:
+
+npm start
+Truy cập ứng dụng tại:
+
+http://localhost:3000
+📂 Cấu trúc thư mục
+/src - Mã nguồn chính
+
+/public - Tài nguyên tĩnh (ảnh, CSS, JS)
+
+/config - File cấu hình
+
+
+🔮 Hướng phát triển tiếp theo
+Thêm tính năng phân quyền người dùng
+
+Tích hợp đăng nhập (Authentication)
+
+Cải thiện giao diện với UI Framework
+
+Xây dựng API RESTful hỗ trợ frontend/mobile
+
+✍️ Tác giả
+Tên: Nguyễn Thiên Phú
+
+Email:  phu444080@gmail.com
